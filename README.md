@@ -76,8 +76,7 @@ The readmission rate depends on the classification and denominator used in the P
 ![Demographics](Screenshots/Demographics.png)
 
 ### 4. Hospital Operations
-![Hospital Operations](Screenshots/Hospital Operations.png)
-
+![Hospital Operations](Screenshots/Hospital Operations.png).
 
 ## Data Quality and Limitations
 
