@@ -76,7 +76,20 @@ The readmission rate depends on the classification and denominator used in the P
 ![Demographics](Screenshots/Demographics.png)
 
 ### 4. Hospital Operations
-![Hospital Operations](Screenshots/Hospital-Operations.png).
+![Hospital Operations](Screenshots/Hospital-Operations.png)
+
+## Key Insights
+
+The dashboard provides an overview of hospital encounters and explores readmission patterns across patient demographics and hospital operational characteristics.
+
+- **Encounter volume:** The dataset contains 101,766 hospital encounters and 71,518 unique patients, providing a broad view of the encounter data.
+- **Readmission status:** The dashboard compares encounters classified as readmitted and not readmitted to help examine readmission patterns.
+- **Length of stay:** Encounters are grouped into 1–3 days, 4–7 days, and 8+ days to compare encounter patterns across length-of-stay categories.
+- **Admission patterns:** Admission type is analyzed to explore how readmission patterns vary across admission categories.
+- **Patient demographics:** Age group and gender visuals support comparisons of encounter patterns across demographic groups.
+- **Hospital operations:** Admission information and discharge disposition are explored to understand the distribution of encounters across operational categories.
+
+These findings are descriptive and summarize patterns in the dataset. They do not establish causation or provide clinical recommendations.
 
 ## Data Quality and Limitations
 
