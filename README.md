@@ -67,16 +67,16 @@ The readmission rate depends on the classification and denominator used in the P
 ## Dashboard Screenshots
 
 ### 1. Executive Overview
-![Executive Overview](Screenshots/executive-overview.png)
+![Executive Overview](Screenshot/executive-overview.png)
 
 ### 2. Readmission Analysis
-![Readmission Analysis](Screenshots/readmission-analysis.png)
+![Readmission Analysis](Screenshot/readmission-analysis.png)
 
 ### 3. Demographics
-![Demographics](Screenshots/Demographics.png)
+![Demographics](Screenshot/Demographics.png)
 
 ### 4. Hospital Operations
-![Hospital Operations](Screenshots/Hospital-Operations.png)
+![Hospital Operations](Screenshot/Hospital-Operations.png)
 
 ## Key Insights
 
