@@ -2,21 +2,26 @@
 
 ## Project Overview
 
-This project uses Microsoft Power BI to analyze hospital encounter data and explore readmission patterns, patient demographics, length of hospital stay, admission sources, and discharge dispositions.
+This project analyzes hospital encounter data using Microsoft Power BI to explore readmission patterns, patient demographics, length of hospital stay, admission sources, and discharge dispositions.
 
-The dashboard transforms hospital encounter data into interactive visual reports, helping users understand patterns in hospital utilization and readmissions.
+The goal was to transform raw healthcare data into an interactive dashboard that makes key performance indicators and encounter-level patterns easier to explore and understand.
+
+## Dashboard Preview
+
+<!-- Add your main Hospital Readmission Dashboard screenshot here -->
 
 ## Business Objective
 
-Hospital readmissions are an important metric in healthcare analytics. This project explores encounter-level data to:
+Hospital readmissions are an important area of healthcare analytics. Understanding encounter volumes and readmission patterns can help healthcare organizations explore patient and operational trends.
 
-- Understand overall hospital encounter volumes and readmission patterns.
-- Analyze readmissions across admission types and admission sources.
-- Explore demographic patterns by age group and gender.
-- Examine length of stay and discharge disposition.
-- Compare overall readmission rates with eligible 30-day readmission rates.
+This project focuses on:
 
-The analysis is descriptive and is intended for data exploration and reporting, not clinical decision-making.
+- Analyzing overall hospital encounter volumes and readmission patterns.
+- Comparing readmission rates across admission types and admission sources.
+- Exploring demographic patterns by age group and gender.
+- Examining encounter volumes and readmission rates across length-of-stay groups.
+- Analyzing discharge disposition patterns.
+- Comparing overall readmission rates with eligible 30-day readmission rates.
 
 ## Dashboard Pages
 
@@ -59,33 +64,39 @@ Measures the percentage of encounters with a recorded readmission, including bot
 
 **30-Day Readmission Rate (Eligible)**
 
-Measures readmissions within 30 days (`<30`) among encounters classified as eligible based on discharge disposition.
+Measures the percentage of eligible encounters with a recorded readmission within 30 days (`<30`).
 
-These measures use different definitions and denominators, so they should be interpreted separately.
+These measures have different definitions and denominators and should be interpreted separately.
 
 **Important note:** Any Readmission Rate includes all encounters. The 30-Day Readmission Rate (Eligible) excludes encounters classified as ineligible based on discharge disposition.
 
 ## Business Insights
 
-The dashboard provides the following observations from the hospital encounter data:
+The analysis of hospital encounter data revealed the following observations:
 
-1. **Overall Readmissions:** Approximately 46.1% of recorded encounters had a readmission, including readmissions within and after 30 days.
+1. **Age Group:** The 70–80 age group recorded the highest encounter volume, with 26,068 encounters.
 
-2. **30-Day Readmissions:** The eligible 30-day readmission rate was approximately 11.4%, calculated using eligible encounters as the denominator.
+2. **Gender:** Female encounters had a higher Any Readmission Rate (46.92%) compared with male encounters (45.12%).
 
-3. **Length of Stay:** The dashboard compares encounter volumes and readmission rates across three length-of-stay groups: 1–3 days, 4–7 days, and 8+ days.
+3. **Admission Type:** Emergency admissions had the highest Any Readmission Rate among the named admission types, at 47.29%.
 
-4. **Patient Demographics:** Users can compare encounter volumes and readmission rates across age groups and gender.
+4. **Length of Stay:** The 1–3 day stay group recorded the highest encounter volume, with 49,188 encounters. However, the 8+ day stay group had the highest eligible 30-day readmission rate, at 13.8%.
 
-5. **Admission Patterns:** The report explores differences in encounter volumes and readmission rates across admission types and admission sources.
+5. **Admission Source:** Emergency Room admissions had the highest Any Readmission Rate among the named admission sources, at 49.37%.
 
-6. **Discharge Patterns:** Discharge disposition analysis provides a breakdown of encounter volumes and readmission measures across discharge categories.
+6. **Discharge Disposition:** Encounters involving discharge or transfer to a psychiatric hospital or psychiatric unit had an eligible 30-day readmission rate of 36.7%, based on 139 eligible encounters.
 
-These findings are descriptive observations from the available dataset. They do not establish causal relationships or explain why readmissions occur.
+### Data Quality Observation
+
+The analysis also identified Null admission-type values and Not Mapped admission-source categories. These categories were kept separate from named categories when interpreting the highest readmission rates.
+
+Their presence highlights the importance of reviewing missing and unmapped values during data preparation.
+
+These findings describe patterns within the available dataset. They do not establish causal relationships or indicate that a particular demographic group, admission type, or discharge category causes readmissions. Rates should also be interpreted alongside their underlying encounter volumes.
 
 ## Data Preparation and Transformation
 
-Data preparation was performed using Power Query and Power BI.
+Data preparation and transformation were performed using Power Query and Power BI.
 
 Key activities included:
 
@@ -94,7 +105,8 @@ Key activities included:
 - Using mapping tables to create readable admission source, admission type, and discharge disposition categories.
 - Creating age categories and length-of-stay groups.
 - Classifying encounters as eligible or ineligible for the eligible 30-day readmission analysis.
-- Organizing fields and measures for reporting and visualization.
+- Creating calculated columns and DAX measures for key performance indicators.
+- Organizing the data model and measures to support interactive reporting.
 
 ## Tools and Technologies
 
@@ -108,19 +120,20 @@ Key activities included:
 
 - Gender and Age Group slicers are available on the main dashboard page.
 - Slicer selections are synchronized across the report pages.
-- Charts and tables respond to the selected filters.
-- KPI cards and visual summaries update dynamically based on filter selections.
+- Charts and tables respond dynamically to filter selections.
+- KPI cards and visual summaries update based on selected categories and filters.
 
 ## Data Interpretation and Reporting Considerations
 
 - Encounters with no recorded readmissions are displayed with zero for the relevant overall readmission count and rate.
-- The eligible 30-day readmission rate remains blank when there are no eligible encounters in the selected category, because a rate cannot be calculated with a zero denominator.
-- Readmission rates are descriptive measures and should be interpreted within the definitions and limitations of the dataset.
+- The eligible 30-day readmission rate remains blank when there are no eligible encounters in a selected category, because a rate cannot be calculated with a zero denominator.
+- Readmission rates are descriptive measures and should be interpreted according to their definitions and denominators.
 
 ## Limitations
 
 - The analysis is based on the available hospital encounter dataset and its recorded variables.
 - Results describe patterns in the data and do not establish causal relationships.
+- Missing and unmapped categories may affect the interpretation of certain results.
 - The dashboard is intended for learning, portfolio demonstration, and exploratory analysis.
 - It is not a clinical decision-support tool and should not be used to make patient-care decisions.
 
@@ -157,7 +170,7 @@ hospital-readmission-powerbi/
     └── 07_Discharge_Disposition_Summary.png
 ```
 
-*Note: Adjust the folder and file names above to match the actual names in your GitHub repository. Before publishing source data, check that you have permission to redistribute it.*
+*Note: Adjust the folder and file names above to match the actual names in your GitHub repository. Check redistribution permissions before uploading source data.*
 
 ## How to Explore the Dashboard
 
