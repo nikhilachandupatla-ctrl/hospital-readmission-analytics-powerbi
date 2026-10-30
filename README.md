@@ -2,129 +2,18 @@
 
 ## Project Overview
 
-This project analyzes hospital encounter data using Microsoft Power BI to explore readmission patterns, patient demographics, length of hospital stay, and hospital admission and discharge characteristics.
+This project uses Microsoft Power BI to analyze hospital encounter data and explore readmission patterns, patient demographics, length of hospital stay, admission sources, and discharge dispositions.
 
-The objective is to transform healthcare data into an interactive dashboard that helps users understand key metrics and explore patterns across different patient and encounter groups.
+The dashboard transforms hospital encounter data into interactive visual reports, helping users understand patterns in hospital utilization and readmissions.
 
-## Business Problem
+## Business Objective
 
-Hospital readmissions are an important area of healthcare analytics. Understanding encounter patterns and differences across patient groups can help identify areas for further investigation.
+Hospital readmissions are an important metric in healthcare analytics. This project explores encounter-level data to:
 
-This project explores the following business questions:
+- Understand overall hospital encounter volumes and readmission patterns.
+- Analyze readmissions across admission types and admission sources.
+- Explore demographic patterns by age group and gender.
+- Examine length of stay and discharge disposition.
+- Compare overall readmission rates with eligible 30-day readmission rates.
 
-- How many hospital encounters and unique patients are represented in the dataset?
-- What proportion of encounters is classified as readmitted?
-- How do readmission patterns vary across length-of-stay groups?
-- How do readmission patterns differ by age, gender, and admission type?
-- What insights can be explored from admission sources and discharge dispositions?
-
-## Tools and Technologies
-
-- **Microsoft Power BI Desktop** – Dashboard development and interactive visualizations
-- **Power Query** – Data cleaning, profiling, and transformation
-- **DAX** – KPI calculations and analytical measures
-- **Data Modeling** – Organizing data and supporting lookup tables
-- **GitHub** – Project documentation and portfolio presentation
-
-## Project Workflow
-
-1. Explored the dataset structure and reviewed column quality.
-2. Examined missing values and important categorical variables.
-3. Cleaned and transformed data using Power Query.
-4. Prepared mapping tables for admission type, admission source, and discharge disposition.
-5. Created DAX measures for encounter counts, unique patients, and readmission metrics.
-6. Developed interactive dashboard pages with charts, KPI cards, and slicers.
-7. Reviewed report navigation, formatting, and analytical calculations.
-
-## Dashboard Pages
-
-### 1. Executive Overview
-Summarizes total encounters, unique patients, readmitted encounters, non-readmitted encounters, and the recorded readmission rate.
-
-### 2. Readmission Analysis
-Explores readmission patterns by length of stay and admission type, including the analysis of 30-day readmission where supported by the measure definition.
-
-### 3. Demographics
-Explores encounter patterns across demographic groups, including age and gender.
-
-### 4. Hospital Operations
-Examines operational characteristics, including length of stay, admission information, and discharge disposition.
-
-## Key Performance Indicators
-
-The following are the currently recorded results from the project. They should be confirmed against the final report before publication.
-
-| Metric | Recorded Value |
-|---|---:|
-| Total Encounters | 101,766 |
-| Unique Patients | 71,518 |
-| Readmitted Encounters | 46,902 |
-| Not-Readmitted Encounters | 54,864 |
-| Recorded Readmission Rate | 46.09% |
-
-The readmission rate depends on the classification and denominator used in the Power BI measure. It should not automatically be interpreted as a 30-day readmission rate.
-
-## Dashboard Screenshots
-
-### 1. Executive Overview
-![Executive Overview](Screenshot/executive-overview.png)
-
-### 2. Readmission Analysis
-![Readmission Analysis](Screenshot/readmission-analysis.png)
-
-### 3. Demographics
-![Demographics](Screenshot/Demographics.png)
-
-### 4. Hospital Operations
-![Hospital Operations](Screenshot/Hospital-Operations.png)
-
-## Key Insights
-
-The dashboard provides an overview of hospital encounters and explores readmission patterns across patient demographics and hospital operational characteristics.
-
-- **Encounter volume:** The dataset contains 101,766 hospital encounters and 71,518 unique patients, providing a broad view of the encounter data.
-- **Readmission status:** The dashboard compares encounters classified as readmitted and not readmitted to help examine readmission patterns.
-- **Length of stay:** Encounters are grouped into 1–3 days, 4–7 days, and 8+ days to compare encounter patterns across length-of-stay categories.
-- **Admission patterns:** Admission type is analyzed to explore how readmission patterns vary across admission categories.
-- **Patient demographics:** Age group and gender visuals support comparisons of encounter patterns across demographic groups.
-- **Hospital operations:** Admission information and discharge disposition are explored to understand the distribution of encounters across operational categories.
-
-These findings are descriptive and summarize patterns in the dataset. They do not establish causation or provide clinical recommendations.
-
-## Data Quality and Limitations
-
-- Some variables contain substantial missing data, including weight and diagnosis fields.
-- The analysis depends on the quality and definitions of the available dataset fields.
-- The original dataset distinguishes between readmission categories, including `NO`, `>30`, and `<30`. These categories must be interpreted correctly when defining readmission measures.
-- The analysis is descriptive and does not establish causal relationships.
-- The dashboard is intended for learning and portfolio demonstration, not clinical decision-making.
-
-## Key Learnings
-
-- Data profiling and transformation using Power Query.
-- Creating and validating DAX measures.
-- Distinguishing encounter counts from unique patient counts.
-- Developing interactive Power BI dashboards.
-- Presenting healthcare data through business-focused visualizations.
-
-## Future Improvements
-
-- Complete and document additional validation checks.
-- Refine readmission definitions and calculation documentation.
-- Enhance dashboard accessibility and usability.
-- Explore additional trends supported by the dataset.
-
-## How to View the Project
-
-1. Review the dashboard screenshots in this repository.
-2. Download the Power BI `.pbix` file.
-3. Open it using Microsoft Power BI Desktop.
-4. Explore the dashboard pages and interact with the available slicers.
-
-## Author
-
-**Nikhila Chandupatla**
-
-Aspiring Data Analyst | Healthcare Analytics | Power BI | SQL | SAS | Python
-
-GitHub: [nikhilachandupatla-ctrl](https://github.com/nikhilachandupatla-ctrl)
+The analysis is descriptive and is intended for data exploration and reporting, not clinical
