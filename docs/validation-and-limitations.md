@@ -1,58 +1,103 @@
-# Data Validation and Project Limitations
+# Validation and Limitations
 
 ## 1. Purpose
 
-This document records the validation checks and limitations associated with the Hospital Readmission Analytics Power BI project.
+This document describes the validation checks performed during dashboard development and the limitations that should be considered when interpreting the results.
 
-## 2. Validation Checklist
+The purpose is to improve transparency and help users understand how the reported figures should be interpreted.
 
-| Check | What to Verify | Status |
-|---|---|---|
-| Total encounters | Confirm the final encounter count | To confirm |
-| Unique patients | Confirm the distinct patient count | To confirm |
-| Readmission classification | Verify source categories and transformation logic | To confirm |
-| Readmission rate | Validate the numerator and denominator | To confirm |
-| Length-of-stay groups | Check category boundaries and assignments | To confirm |
-| Mapping tables | Verify admission and discharge mappings | To confirm |
-| Slicer interactions | Check the intended visual interactions | To confirm |
-| Page navigation | Test navigation across all report pages | To confirm |
+## 2. Validation Checks
 
-Update each status after completing the relevant check.
+The following checks were performed during the development of the dashboard.
 
-## 3. KPI Reconciliation
+### KPI Validation
 
-The current recorded results are:
+The main KPI measures were reviewed with report filters reset.
 
-- Total encounters: 101,766
-- Unique patients: 71,518
-- Readmitted encounters: 46,902
-- Not-readmitted encounters: 54,864
-- Recorded readmission rate: 46.09%
+| KPI | Validated Result |
+|---|---:|
+| Total Encounters | 101,766 |
+| Unique Patients | 71,518 |
+| Any Readmission Encounters | 46,902 |
+| Not Readmitted Encounters | 54,864 |
+| Any Readmission Rate | 46.09% |
+| Eligible Encounters | 99,343 |
+| Eligible 30 Day Readmissions | 11,314 |
+| 30 Day Readmission Rate (Eligible) | 11.39% |
 
-Confirm these results against the final Power BI model and the filters applied.
+### Readmission Definition Checks
 
-The readmitted and not-readmitted categories should be reconciled with the relevant encounter population. Do not assume they cover all records without checking the classification logic.
+- The `<30` category was used to identify recorded readmissions within 30 days.
+- The `>30` category was included in the Any Readmission calculation.
+- The `NO` category was used to identify encounters without a recorded readmission.
+- The eligible 30-day calculation was restricted to encounters classified as eligible.
 
-## 4. Readmission Definition
+### Filter and Interaction Checks
 
-The original dataset distinguishes `NO`, `>30`, and `<30`.
+- Gender and age-group slicers were tested.
+- Slicer synchronization across report pages was checked.
+- KPI cards and charts were reviewed under different filter selections.
+- Page navigation was tested to confirm that users could move between report pages.
 
-The binary status used in the report must be reviewed before making claims about 30-day readmission. A general readmission classification is not automatically equivalent to a 30-day readmission rate.
+### Visual Validation
 
-## 5. Limitations
+- Chart titles and labels were reviewed for clarity.
+- Number formatting and percentage displays were checked.
+- Encounter volumes and readmission rates were presented as separate measures where appropriate.
+- Categories with missing or unmapped values were reviewed to avoid misleading comparisons.
 
-- Some variables contain substantial missing information.
-- Results depend on the quality and definitions of the source data.
-- A patient may have multiple encounters.
-- Descriptive comparisons do not establish causation.
-- The report is for educational and portfolio purposes, not clinical decision-making.
+## 3. Data Quality Considerations
 
-## 6. Privacy and Data Sharing
+The dataset contains categories that require careful interpretation.
 
-Before sharing the repository publicly, confirm that the source dataset can be used and referenced under its applicable terms.
+### Missing Admission Type Values
 
-Do not publish confidential records, patient-identifiable information, or sensitive data in the report, screenshots, or supporting files.
+Some encounters have missing admission-type information. These records are retained as a separate category and should not be interpreted as a specific admission type.
 
-## 7. Final Review
+### Unmapped Admission Sources
 
-Record completed checks accurately. Document unresolved issues and update this file when the report is validated.
+Some admission-source records are classified as Not Mapped. These values are treated as a data-quality observation rather than a meaningful named admission source.
+
+### Diagnosis Field Completeness
+
+The diagnosis fields have varying levels of completeness. The presence of missing diagnosis values should be considered when interpreting diagnosis-related analysis.
+
+### Discharge Disposition Categories
+
+Certain discharge disposition categories are excluded from the eligible 30-day readmission calculation according to the project's eligibility rule.
+
+Their encounter volumes should not be confused with the eligible population used to calculate the rate.
+
+## 4. Project Limitations
+
+The following limitations should be considered:
+
+1. **Historical dataset:** The analysis reflects the records available in the supplied dataset and does not represent current hospital performance.
+
+2. **Encounter-level analysis:** Patients may have multiple encounters. Encounter counts should not be interpreted as unique patient counts.
+
+3. **Recorded readmission outcomes:** The analysis relies on the readmission values provided in the dataset.
+
+4. **Eligibility definition:** The eligible 30-day readmission rate depends on the discharge disposition exclusions defined for this project.
+
+5. **Missing and unmapped values:** Incomplete or unmapped categories may affect comparisons across groups.
+
+6. **Descriptive analysis:** The dashboard identifies patterns and associations within the available data. It does not establish that a particular demographic, admission type, or length of stay causes readmission.
+
+7. **Limited external context:** The dataset does not provide all the clinical and operational information that may influence readmission outcomes.
+
+## 5. Future Improvements
+
+Potential improvements include:
+
+- Adding additional validation against independent reference results.
+- Exploring diagnosis-related readmission patterns after reviewing data completeness.
+- Investigating patient-level readmission sequences.
+- Adding time-based analysis if reliable date fields and suitable data become available.
+- Incorporating additional hospital or clinical information to provide broader context.
+
+## 6. Conclusion
+
+The dashboard provides a structured view of hospital encounter and readmission patterns. Its results should be interpreted using the documented metric definitions, eligibility rules, and data limitations.
+
+Clear definitions and validation checks are important for producing reliable and understandable reporting.
