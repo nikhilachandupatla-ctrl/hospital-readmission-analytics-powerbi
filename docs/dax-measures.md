@@ -1,71 +1,158 @@
-# DAX Measures and Business Definitions
+# DAX Measures
 
-## Overview
+## 1. Overview
 
-This document describes the key measures used in the Hospital Readmission Analytics dashboard.
+This document describes the key DAX measures used in the Hospital Readmission Analytics Dashboard.
 
-The final DAX formulas must be copied from the actual Power BI model before publication.
+The measures support encounter analysis, patient counts, readmission reporting, and eligible 30-day readmission analysis.
 
-## 1. Total Encounters
+## 2. Encounter and Patient Measures
 
-**Purpose:** Counts hospital encounter records in the current filter context.
+### Total Encounters
 
-**Recorded result:** 101,766
+Counts the total number of hospital encounters.
 
-**Formula:** Add the exact DAX measure from Power BI Desktop.
+```dax
+Total Encounters =
+COUNTROWS(diabetic_data)
+```
 
-## 2. Unique Patients
+### Unique Patients
 
-**Purpose:** Counts distinct patient identifiers.
+Counts distinct patients using the patient identifier.
 
-**Recorded result:** 71,518
+```dax
+Unique Patients =
+DISTINCTCOUNT(diabetic_data[patient_nbr])
+```
 
-**Formula:** Add the exact DAX measure from Power BI Desktop.
+### Any Readmission Encounters
 
-## 3. Readmitted Encounters
+Counts encounters with a recorded readmission either within or after 30 days.
 
-**Purpose:** Counts encounters classified as readmitted under the project's current definition.
+```dax
+Any Readmission Encounters =
+CALCULATE(
+    COUNTROWS(diabetic_data),
+    diabetic_data[readmitted] IN {"<30", ">30"}
+)
+```
 
-**Recorded result:** 46,902
+### Not Readmitted Encounters
 
-**Formula:** Add the exact DAX measure from Power BI Desktop.
+Counts encounters with no recorded readmission.
 
-## 4. Not-Readmitted Encounters
+```dax
+Not Readmitted Encounters =
+CALCULATE(
+    COUNTROWS(diabetic_data),
+    diabetic_data[readmitted] = "NO"
+)
+```
 
-**Purpose:** Counts encounters classified as not readmitted under the project's current definition.
+## 3. Readmission Measures
 
-**Recorded result:** 54,864
+### Any Readmission Rate
 
-**Formula:** Add the exact DAX measure from Power BI Desktop.
+Calculates the percentage of encounters with a recorded readmission, including both within-30-day and after-30-day outcomes.
 
-## 5. Readmission Rate
+```dax
+Any Readmission Rate =
+DIVIDE(
+    [Any Readmission Encounters],
+    [Total Encounters],
+    0
+)
+```
 
-**Purpose:** Reports the proportion of encounters classified as readmitted under the measure's definition.
+### Readmitted Within 30 Days
 
-**Recorded result:** 46.09%
+Counts encounters with a recorded readmission within 30 days.
 
-**Formula:** Add the exact DAX measure from Power BI Desktop.
+```dax
+Readmitted Within 30 Days =
+CALCULATE(
+    COUNTROWS(diabetic_data),
+    diabetic_data[readmitted] = "<30"
+)
+```
 
-Document the numerator, denominator, filters, and readmission classification.
+## 4. Eligible 30-Day Readmission Measures
 
-## 6. Readmission by Length of Stay
+For this project, selected discharge disposition categories are excluded from the eligible encounter population.
 
-**Purpose:** Compares the readmission measure across the `1-3 Days`, `4-7 Days`, and `8+ Days` categories.
+### Readmission Eligible
 
-**Formula:** Add the final measure used by the visual.
+Calculated column:
 
-## 7. 30-Day Readmission Analysis
+```dax
+Readmission Eligible =
+IF(
+    diabetic_data[discharge_disposition_id]
+        IN {"11", "13", "14", "19", "20", "21"},
+    "Excluded",
+    "Eligible"
+)
+```
 
-**Purpose:** Analyzes readmission within 30 days only if the final measure explicitly implements that definition.
+### Eligible Encounters
 
-**Formula:** Add the exact final 30-day measure from the Power BI model.
+Counts encounters classified as eligible.
 
-Document its numerator, denominator, and classification logic.
+```dax
+Eligible Encounters =
+CALCULATE(
+    [Total Encounters],
+    diabetic_data[Readmission Eligible] = "Eligible"
+)
+```
 
-## DAX Concepts
+### Eligible 30 Day Readmissions
 
-- Measures are evaluated in the current filter context.
-- Slicers can change measure results.
-- Distinct counts are used when counting unique patient identifiers.
-- Percentage measures require a clearly defined numerator and denominator.
-- The documented formula must match the formula used in the final report.
+Counts eligible encounters with a readmission within 30 days.
+
+```dax
+Eligible 30 Day Readmissions =
+CALCULATE(
+    [Readmitted Within 30 Days],
+    diabetic_data[Readmission Eligible] = "Eligible"
+)
+```
+
+### 30 Day Readmission Rate (Eligible)
+
+Calculates the percentage of eligible encounters with a recorded readmission within 30 days.
+
+```dax
+30 Day Readmission Rate (Eligible) =
+DIVIDE(
+    [Eligible 30 Day Readmissions],
+    [Eligible Encounters],
+    BLANK()
+)
+
+## 5. Baseline Results
+
+With report filters reset, the dashboard displays the following baseline results:
+
+| Measure | Result |
+|---|---:|
+| Total Encounters | 101,766 |
+| Unique Patients | 71,518 |
+| Any Readmission Encounters | 46,902 |
+| Not Readmitted Encounters | 54,864 |
+| Any Readmission Rate | 46.09% |
+| Eligible Encounters | 99,343 |
+| Eligible 30 Day Readmissions | 11,314 |
+| 30 Day Readmission Rate (Eligible) | 11.39% |
+
+These figures represent the dataset-level results with no report slicer filters applied.
+
+## 6. Calculation Notes
+
+- Any Readmission Rate includes both `<30` and `>30` outcomes.
+- The eligible 30-day readmission rate uses only `<30` outcomes in its numerator.
+- The eligible encounter population excludes the specified discharge disposition IDs.
+- `DIVIDE` is used to handle division safely.
+- The eligible 30-day rate returns BLANK when there are no eligible encounters in the current filter context.
+- Dashboard measures respond to report filters and slicers.
