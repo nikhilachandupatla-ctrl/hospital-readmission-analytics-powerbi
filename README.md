@@ -8,7 +8,7 @@ The goal was to transform raw healthcare data into an interactive dashboard that
 
 ## Dashboard Preview
 
-<!-- Add your main Hospital Readmission Dashboard screenshot here -->
+![Hospital Readmission Dashboard](Screenshots/01_Hospital_Readmission_Dashboard.png)
 
 ## Business Objective
 
