@@ -130,6 +130,7 @@ DIVIDE(
     [Eligible Encounters],
     BLANK()
 )
+```
 
 ## 5. Baseline Results
 
