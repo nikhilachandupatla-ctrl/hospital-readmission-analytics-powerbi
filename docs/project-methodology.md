@@ -1,58 +1,82 @@
 # Project Methodology
 
-## 1. Project Objective
+## 1. Project Approach
 
-The objective of this project is to analyze hospital encounter data and build an interactive Power BI dashboard exploring readmission patterns, patient demographics, length of stay, and hospital admission and discharge characteristics.
+The Hospital Readmission Analytics Dashboard was developed using a structured approach, starting with raw healthcare encounter data and progressing through data preparation, modelling, DAX calculations, and interactive reporting.
 
-## 2. Data Understanding
+The objective was to organize the data into meaningful categories and present readmission patterns through an interactive Power BI report.
 
-The project uses the `diabetic_data` table. The initial analysis focuses on understanding the data structure, field definitions, data types, category values, and missing information.
+## 2. Data Sources
 
-The analysis distinguishes hospital encounters from unique patients because one patient may have multiple encounters.
+The project uses two CSV files:
 
-## 3. Data Profiling and Cleaning
+- `diabetic_data.csv`: Contains hospital encounter information, patient demographics, diagnoses, treatments, length of stay, and readmission outcomes.
+- `IDS_mapping.csv`: Provides descriptions for coded admission and discharge-related fields.
 
-Power Query was used to examine column quality, completeness, and categorical values and to prepare the data for analysis.
+## 3. Data Preparation
 
-Initial profiling identified substantial missingness in some fields, including weight and diagnosis variables. Missing values must be interpreted according to the meaning of each field.
+Data preparation was performed in Power Query.
 
-## 4. Data Transformation
+The main activities included:
 
-The data preparation process included mapping admission type, admission source, and discharge disposition categories for reporting.
+- Reviewing the source tables and their structures.
+- Checking column names and data types.
+- Reviewing missing and unmapped values.
+- Using the mapping dataset to translate coded admission and discharge categories into readable descriptions.
+- Creating grouped categories for admission type and admission source.
+- Creating length-of-stay groups for easier comparison.
+- Reviewing diagnosis-field completeness.
+- Organizing the data for reporting and analysis.
 
-Length of stay is grouped into the following categories:
+Missing and unmapped categories were retained where appropriate rather than being automatically treated as meaningful business categories.
 
-- 1-3 Days
-- 4-7 Days
-- 8+ Days
+## 4. Data Modelling
 
-These categories support comparisons across different hospital stay durations.
+The prepared encounter data was used as the main reporting table.
 
-## 5. DAX and KPI Development
+The mapping information was incorporated to provide readable descriptions for coded fields. The model was organized to support the dashboard's measures, visualizations, and report-level filtering.
 
-DAX measures were created for encounter counts, unique patients, readmitted encounters, non-readmitted encounters, and the recorded readmission rate.
+## 5. DAX Calculations
 
-The final formulas and business definitions are documented in `dax-measures.md`.
+DAX measures were developed to calculate:
+
+- Total encounters.
+- Unique patients.
+- Any readmission encounters.
+- Not-readmitted encounters.
+- Any readmission rate.
+- Eligible encounters.
+- Eligible 30-day readmissions.
+- Eligible 30-day readmission rate.
+
+Calculated categories were also used to support analysis by length of stay, admission type, and admission source.
 
 ## 6. Dashboard Development
 
-The report contains four pages:
+The report was organized into seven pages:
 
-1. Executive Overview
-2. Readmission Analysis
-3. Demographics
-4. Hospital Operations
+1. Hospital Readmission Dashboard
+2. Executive Overview
+3. Readmission Analysis
+4. Demographic Analysis
+5. Admission Source Analysis
+6. Discharge Disposition Analysis
+7. Discharge Disposition Summary
 
-The report uses KPI cards, charts, slicers, and page navigation to support interactive exploration.
+The visuals were selected to communicate encounter volumes, readmission patterns, demographic comparisons, and operational characteristics.
 
-## 7. Validation
+Gender and age-group slicers were synchronized across the report pages to support consistent filtering.
 
-The final review should verify KPI calculations, patient and encounter counts, length-of-stay categories, mapping tables, slicer interactions, and navigation.
+## 7. Validation and Review
 
-The readmission classification and denominator must be checked before interpreting a result as a 30-day readmission rate.
+The dashboard was reviewed by checking KPI results, comparing calculated results against the source categories, testing slicer interactions, and reviewing visual labels and formatting.
 
-## 8. Limitations
+The baseline KPI values were checked with report filters reset.
 
-This is a descriptive portfolio project. Observed patterns do not establish causal relationships and should not be used for clinical decision-making.
+Additional attention was given to missing and unmapped categories to avoid misleading interpretations.
 
-The findings depend on the source data, available variables, data-quality limitations, and the definitions used in the report.
+## 8. Final Output
+
+The completed project includes an interactive Power BI report, a project README, dashboard screenshots, and supporting documentation.
+
+The report is designed to help users explore hospital encounter and readmission patterns through clearly defined measures and interactive visuals.
