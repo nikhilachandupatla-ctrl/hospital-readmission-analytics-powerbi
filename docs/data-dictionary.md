@@ -1,59 +1,66 @@
 # Data Dictionary
 
-## Overview
+## 1. Overview
 
-This document describes important fields used in the Hospital Readmission Analytics Power BI project.
+This project uses a hospital encounter dataset containing information about patient demographics, hospital admissions, diagnoses, treatments, length of stay, and readmission outcomes.
 
-## Source Fields
+The dataset is analyzed at the encounter level. Each row represents a hospital encounter, rather than necessarily representing a unique patient.
 
-| Field | Description | Analytical Use |
-|---|---|---|
-| `encounter_id` | Hospital encounter identifier | Counting encounters |
-| `patient_nbr` | Patient identifier | Counting unique patients |
-| `readmitted` | Original readmission classification | Readmission analysis |
-| `time_in_hospital` | Length of stay in days | Length-of-stay analysis |
-| `admission_type_id` | Encoded admission type | Admission comparisons |
-| `admission_source_id` | Encoded admission source | Admission-source analysis |
-| `discharge_disposition_id` | Encoded discharge disposition | Discharge analysis |
-| `gender` | Recorded gender category | Demographic analysis |
-| `age` | Age category | Demographic analysis |
-| `diag_1` | Primary diagnosis code | Diagnosis data exploration |
-| `diag_2` | Secondary diagnosis code | Diagnosis data exploration |
-| `diag_3` | Additional diagnosis code | Diagnosis data exploration |
-| `weight` | Recorded weight information | Data completeness review |
+## 2. Dataset Information
 
-Confirm the exact spelling of each field against the final Power BI model.
+| Item | Description |
+|---|---|
+| Primary dataset | `diabetic_data.csv` |
+| Mapping dataset | `IDS_mapping.csv` |
+| Number of encounters | 101,766 |
+| Unique patients | 71,518 |
+| Number of original columns | 50 |
+| Analysis tool | Microsoft Power BI |
 
-## Derived Categories
+## 3. Important Fields
 
-### Length of Stay Group
+| Field | Description |
+|---|---|
+| `encounter_id` | Unique identifier for a hospital encounter |
+| `patient_nbr` | Patient identifier used to distinguish patients |
+| `race` | Recorded patient race category |
+| `gender` | Recorded patient gender |
+| `age` | Patient age range |
+| `admission_type_id` | Coded hospital admission type |
+| `discharge_disposition_id` | Coded discharge destination or disposition |
+| `admission_source_id` | Coded source of hospital admission |
+| `time_in_hospital` | Number of days spent in the hospital |
+| `diag_1` | Primary diagnosis code |
+| `diag_2` | Secondary diagnosis code |
+| `diag_3` | Additional diagnosis code |
+| `readmitted` | Readmission outcome: `<30`, `>30`, or `NO` |
 
-- `1-3 Days`
-- `4-7 Days`
-- `8+ Days`
+## 4. Derived Fields Used in the Dashboard
 
-These groups are used to compare encounter patterns across length-of-stay categories.
+| Derived field | Description |
+|---|---|
+| `Readmission Status` | Groups encounters into Readmitted and Not Readmitted |
+| `Length of Stay Group` | Groups hospital stays into 1–3 Days, 4–7 Days, and 8+ Days |
+| `Admission Type Group` | Groups admission types into reporting categories |
+| `Admission Source Group` | Groups admission sources into reporting categories |
+| `Readmission Eligible` | Identifies encounters included or excluded from the eligible 30-day readmission calculation |
 
-### Readmission Status
+## 5. Readmission Outcome Definitions
 
-The Power BI report uses the labels `Readmitted` and `Not Readmitted`.
+| Original value | Interpretation |
+|---|---|
+| `<30` | Readmitted within 30 days |
+| `>30` | Readmitted after 30 days |
+| `NO` | No recorded readmission |
 
-The original source field includes `NO`, `>30`, and `<30`. The report's classification logic must be reviewed before interpreting this binary status as a specific 30-day readmission measure.
+**Any Readmission** includes both `<30` and `>30`.
 
-## Data Quality Notes
+**30-Day Readmission** includes only encounters with the `<30` outcome, subject to the project's eligibility classification.
 
-Initial profiling indicated approximately:
+## 6. Data Interpretation Notes
 
-- 97% missing values in weight.
-- 1% missing values in `diag_1`.
-- 5% missing values in `diag_2`.
-- 10% missing values in `diag_3`.
-
-These percentages should be rechecked against the final model before publication.
-
-## Interpretation Notes
-
-- One patient may have multiple hospital encounters.
-- Encounter counts and unique patient counts represent different measures.
-- Missing diagnosis information does not necessarily mean that a patient has no diagnosis.
-- Mapping tables should be interpreted using the appropriate source codes and definitions.
+- An encounter is not the same as a unique patient. One patient may have multiple encounters.
+- Coded admission and discharge fields require mapping to meaningful descriptions.
+- Missing or unmapped categories are retained and interpreted separately.
+- Diagnosis fields are available in the dataset but are not necessarily used in every dashboard visual.
+- The data dictionary describes the fields relevant to this project and is not intended to document every original dataset column.
