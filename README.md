@@ -7,8 +7,26 @@ This project analyzes hospital encounter data using Microsoft Power BI to explor
 The goal was to transform raw healthcare data into an interactive dashboard that makes key performance indicators and encounter-level patterns easier to explore and understand.
 
 ## Dashboard Preview
-
 ![Hospital Readmission Dashboard](Screenshots/01_Hospital_Readmission_Dashboard.png)
+## Dashboard Screenshots
+
+### 1. Executive Overview
+![Executive Overview](Screenshots/02_Executive_Overview.png)
+
+### 2. Readmission Analysis
+![Readmission Analysis](Screenshots/03_Readmission_Analysis.png)
+
+### 3. Demographic Analysis
+![Demographic Analysis](Screenshots/04_Demographic_Analysis.png)
+
+### 4. Admission Source Analysis
+![Admission Source Analysis](Screenshots/05_Admission_Source_Analysis.png)
+
+### 5. Discharge Disposition Analysis
+![Discharge Disposition Analysis](Screenshots/06_Discharge_Disposition_Analysis.png)
+
+### 6. Discharge Disposition Summary
+![Discharge Disposition Summary](Screenshots/07_Discharge_Disposition_Summary.png)
 
 ## Business Objective
 
